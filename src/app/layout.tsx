@@ -6,7 +6,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://portafolio-arl11.vercel.app"),
+  metadataBase: new URL("https://portafolio-sable-beta-42.vercel.app"),
   title: "Abraham Robledo — Desarrollador de Software",
   description:
     "Portafolio de Abraham Robledo, estudiante de Ingeniería en Sistemas (UAA, promedio 9.65) y desarrollador freelance con 2 años construyendo sistemas web a medida para clientes en México.",
