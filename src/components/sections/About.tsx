@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView, animate } from "framer-motion";
+import Image from "next/image";
 import SectionTitle from "@/components/ui/SectionTitle";
 
 const stats = [
@@ -53,15 +54,18 @@ export default function About() {
             <motion.div
               whileHover={{ scale: 1.04, rotate: 1 }}
               transition={{ type: "spring", stiffness: 280 }}
-              className="relative h-64 w-64 overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-2xl sm:h-72 sm:w-72"
-              aria-label="Foto de perfil de Abraham Robledo"
-              role="img"
+              className="relative h-64 w-64 overflow-hidden rounded-2xl shadow-2xl ring-4 ring-indigo-100 dark:ring-indigo-900/40 sm:h-72 sm:w-72"
             >
-              <div className="flex h-full items-center justify-center text-5xl font-bold tracking-tight text-white/90 select-none sm:text-6xl">
-                ARL
-              </div>
-              <div aria-hidden="true" className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-white/10 blur-xl" />
-              <div aria-hidden="true" className="absolute -bottom-6 -left-6 h-24 w-24 rounded-full bg-purple-300/20 blur-lg" />
+              <Image
+                src="/images/profile.jpg"
+                alt="Abraham Robledo — Foto de perfil"
+                fill
+                className="object-cover object-top"
+                priority
+                sizes="(max-width: 640px) 256px, 288px"
+              />
+              {/* Degradado sutil en la base */}
+              <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/20 to-transparent" />
             </motion.div>
           </motion.div>
 
