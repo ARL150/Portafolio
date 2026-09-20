@@ -5,10 +5,9 @@ import Runner from "@/components/ui/Runner";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 const lines = [
-  { at: 4,  cmd: "whoami",                 out: "abraham_robledo" },
-  { at: 22, cmd: "cat rol.txt",            out: "Ingeniería en Sistemas Computacionales" },
-  { at: 42, cmd: "load --stack",           out: "react · next.js · typescript · node · sql" },
-  { at: 66, cmd: "check --cloud",          out: "aws · oracle cloud · vercel  [OK]" },
+  { at: 6,  cmd: "whoami",                 out: "abraham_robledo · Ing. en Sistemas" },
+  { at: 34, cmd: "load --stack",           out: "react · next.js · typescript · node · sql" },
+  { at: 62, cmd: "check --cloud",          out: "aws · oracle cloud · vercel  [OK]" },
   { at: 86, cmd: "run portfolio.exe",      out: "compilando experiencias..." },
 ];
 
@@ -20,7 +19,7 @@ export default function Loader() {
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    const total = reduce ? 500 : 5200;
+    const total = reduce ? 500 : 3600;
     const start = performance.now();
     let closer: ReturnType<typeof setTimeout>;
     const tick = setInterval(() => {
@@ -75,6 +74,24 @@ export default function Loader() {
           />
 
           <div className="relative w-full max-w-xl">
+            {/* Logo + título */}
+            <motion.div
+              initial={{ opacity: 0, y: -16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="mb-8 flex flex-col items-center gap-3"
+            >
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-indigo-400/40 bg-gray-900 shadow-[0_0_30px_rgba(99,102,241,0.45)]">
+                <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-2xl font-extrabold tracking-tight text-transparent">
+                  ARL
+                </span>
+              </div>
+              <p className="font-mono text-sm tracking-[0.3em] text-indigo-200 uppercase">
+                Cargando portafolio
+                <span className="loader-dots" aria-hidden="true" />
+              </p>
+            </motion.div>
+
             {/* Ventana de terminal */}
             <motion.div
               initial={{ opacity: 0, y: 24, scale: 0.97 }}
@@ -89,7 +106,7 @@ export default function Loader() {
                 <span className="ml-3 font-mono text-xs text-gray-500">abraham@portfolio: ~</span>
               </div>
 
-              <div className="min-h-[220px] space-y-2 p-5 font-mono text-[13px] leading-relaxed sm:text-sm">
+              <div className="min-h-[190px] space-y-2 p-5 font-mono text-[13px] leading-relaxed sm:text-sm">
                 {lines.map((l) =>
                   pct >= l.at ? (
                     <motion.div

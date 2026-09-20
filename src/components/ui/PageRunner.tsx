@@ -5,7 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Runner from "@/components/ui/Runner";
 
 const phrases = ["¡Contrátame! 😄", "npm run hire-me", "Sin bugs... casi 🐛", "¡Espérame!", "Café + código ☕"];
-const SIZE = 44;
+const SIZE = 30;
 
 /**
  * Mascota que vive en la página: se pasea en diagonales y zigzag por la pantalla
@@ -90,12 +90,12 @@ export default function PageRunner() {
       }
 
       // nunca sale de la pantalla: sube y baja junto con el scroll
-      const top = sy + 70;
+      const top = sy + 64;
       const bottom = Math.min(sy + window.innerHeight - SIZE - 16, maxY());
       y = Math.max(top, Math.min(y, Math.max(top, bottom)));
 
       // balanceo perpendicular al avanzar para que el recorrido no sea una recta
-      const wob = isRunning ? Math.sin(now / 130) * 7 : 0;
+      const wob = isRunning ? Math.sin(now / 130) * 5 : 0;
       box.style.transform = `translate3d(${x + wob}px, ${y - Math.abs(wob) * 0.6}px, 0)`;
       raf = requestAnimationFrame(frame);
     };
@@ -147,12 +147,12 @@ export default function PageRunner() {
         tabIndex={-1}
         aria-label="Mascota: haz clic para que salte"
         onClick={onClick}
-        animate={hop ? { y: [0, -28, 0] } : undefined}
+        animate={hop ? { y: [0, -20, 0] } : undefined}
         transition={{ duration: 0.45, ease: "easeOut" }}
-        className="pointer-events-auto absolute bottom-0 left-1.5 cursor-pointer rounded-lg bg-gray-900 px-0.5 pt-0.5 shadow-lg shadow-black/30 ring-1 ring-indigo-400/60"
+        className="pointer-events-auto absolute bottom-0 left-0.5 cursor-pointer rounded-lg bg-gray-900 px-0.5 pt-0.5 shadow-lg shadow-black/30 ring-1 ring-indigo-400/60"
         style={{ scaleX: facing }}
       >
-        <Runner running={running} />
+        <Runner running={running} scale={0.6} />
       </motion.button>
     </div>
   );

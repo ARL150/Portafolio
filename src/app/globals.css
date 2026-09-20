@@ -140,3 +140,16 @@ html.theme-transition *::after {
 .runner-done {
   animation: runner-hop 0.5s ease-out infinite;
 }
+
+/* ── Puntos suspensivos animados del loader ── */
+@keyframes loader-dots {
+  0%   { content: ""; }
+  25%  { content: "."; }
+  50%  { content: ".."; }
+  75%  { content: "..."; }
+}
+
+.loader-dots::after {
+  content: "";
+  animation: loader-dots 1.2s steps(1) infinite;
+}

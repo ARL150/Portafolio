@@ -1,7 +1,7 @@
 /** Monito con laptop. `running` mueve brazos y piernas. */
-export default function Runner({ running = true }: { running?: boolean }) {
+export default function Runner({ running = true, scale = 1 }: { running?: boolean; scale?: number }) {
   return (
-    <svg viewBox="0 0 32 40" width="32" height="40" fill="none" stroke="#e0e7ff" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
+    <svg viewBox="0 0 32 40" width={32 * scale} height={40 * scale} fill="none" stroke="#e0e7ff" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
       <circle cx="16" cy="7" r="5" fill="#e0e7ff" stroke="none" />
       <path d="M16 12 V25" />
       <g className={running ? "runner-arm-a" : ""}><path d="M16 15 L9 21" /></g>
