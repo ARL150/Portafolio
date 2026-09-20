@@ -22,12 +22,31 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [active, setActive] = useState("#inicio");
 
   useEffect(() => {
     setMounted(true);
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+
+    // Scroll-spy: resalta el link de la sección visible
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(`#${e.target.id}`);
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+    links.forEach((l) => {
+      const el = document.querySelector(l.href);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      observer.disconnect();
+    };
   }, []);
 
   return (
@@ -82,9 +101,23 @@ export default function Navbar() {
               >
                 <a
                   href={link.href}
-                  className="text-sm font-medium text-gray-600 transition-colors hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded dark:text-gray-300 dark:hover:text-indigo-400"
+                  aria-current={active === link.href ? "true" : undefined}
+                  className={cn(
+                    "relative block py-1 text-sm font-medium transition-colors hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded dark:hover:text-indigo-400",
+                    active === link.href
+                      ? "text-indigo-600 dark:text-indigo-400"
+                      : "text-gray-600 dark:text-gray-300"
+                  )}
                 >
                   {link.label}
+                  {active === link.href && (
+                    <motion.span
+                      layoutId="nav-underline"
+                      aria-hidden="true"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      className="absolute inset-x-0 -bottom-0.5 h-0.5 rounded-full bg-indigo-600 dark:bg-indigo-400"
+                    />
+                  )}
                 </a>
               </motion.li>
             ))}
@@ -99,7 +132,12 @@ export default function Navbar() {
           >
             {mounted && (
               <button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                onClick={() => {
+                  const root = document.documentElement;
+                  root.classList.add("theme-transition");
+                  setTheme(theme === "dark" ? "light" : "dark");
+                  setTimeout(() => root.classList.remove("theme-transition"), 600);
+                }}
                 className="rounded-lg p-2 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
                 aria-label={theme === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
               >

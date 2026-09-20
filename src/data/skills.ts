@@ -39,6 +39,8 @@ export const softSkills: SkillCategory[] = [
       "Gestión de expectativas y entregas por etapas",
       "Escucha activa",
       "Empatía con el cliente",
+      "Comunicación asertiva",
+      "Documentación clara de lo que construyo",
     ],
   },
   {
@@ -53,6 +55,19 @@ export const softSkills: SkillCategory[] = [
       "Trabajo bajo presión",
       "Adaptabilidad",
       "Pensamiento crítico",
+      "Gestión del tiempo y priorización",
+      "Organización",
+    ],
+  },
+  {
+    category: "Colaboración & Crecimiento",
+    skills: [
+      "Trabajo en equipo",
+      "Colaboración con equipos multidisciplinarios",
+      "Apertura a la retroalimentación",
+      "Creatividad para resolver problemas",
+      "Responsabilidad y compromiso",
+      "Curiosidad por nuevas tecnologías",
     ],
   },
 ];

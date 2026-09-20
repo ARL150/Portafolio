@@ -5,6 +5,7 @@ import { ExternalLink } from "lucide-react";
 import { GitHubIcon } from "@/components/ui/Icons";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Badge from "@/components/ui/Badge";
+import SpotlightCard from "@/components/ui/SpotlightCard";
 import { projects } from "@/data/projects";
 
 const container = {
@@ -34,7 +35,7 @@ export default function Projects() {
           className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
         >
           {projects.map((project) => (
-            <motion.article
+            <SpotlightCard
               key={project.title}
               variants={cardVariant}
               whileHover={{ y: -6, scale: 1.015 }}
@@ -110,7 +111,7 @@ export default function Projects() {
                   )}
                 </div>
               </div>
-            </motion.article>
+            </SpotlightCard>
           ))}
         </motion.div>
       </div>

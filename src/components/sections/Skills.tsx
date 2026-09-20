@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Code2, Monitor, Database, Wrench, Brain, MessageSquare,
-  Globe, ChevronRight, ShoppingBag, Server, Megaphone,
+  Code2, Monitor, Database, Brain, MessageSquare,
+  Globe, Users, ChevronRight, ShoppingBag, Server, Megaphone,
 } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Badge from "@/components/ui/Badge";
@@ -19,6 +19,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
   "Marketing Digital & SEO":      <Megaphone size={18} />,
   "Comunicación & Clientes":      <MessageSquare size={18} />,
   "Trabajo & Gestión":            <Brain size={18} />,
+  "Colaboración & Crecimiento":   <Users size={18} />,
 };
 
 const categoryColors: Record<string, string> = {
@@ -30,6 +31,7 @@ const categoryColors: Record<string, string> = {
   "Marketing Digital & SEO":      "bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300",
   "Comunicación & Clientes":      "bg-pink-100 text-pink-700 dark:bg-pink-900/40 dark:text-pink-300",
   "Trabajo & Gestión":            "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300",
+  "Colaboración & Crecimiento":   "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
 };
 
 const tabs = [
@@ -74,14 +76,24 @@ export default function Skills() {
               aria-selected={activeTab === tab.id}
               aria-controls={`tabpanel-${tab.id}`}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
+              className={`relative flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
                 activeTab === tab.id
-                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-200 dark:shadow-indigo-900/30"
+                  ? "text-white"
                   : "bg-white text-gray-600 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
               }`}
             >
-              {tab.icon}
-              {tab.label}
+              {activeTab === tab.id && (
+                <motion.span
+                  layoutId="skills-tab-pill"
+                  aria-hidden="true"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  className="absolute inset-0 rounded-full bg-indigo-600 shadow-md shadow-indigo-200 dark:shadow-indigo-900/30"
+                />
+              )}
+              <span className="relative z-10 flex items-center gap-2">
+                {tab.icon}
+                {tab.label}
+              </span>
             </button>
           ))}
         </div>

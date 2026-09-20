@@ -1,9 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, Mail, ArrowRight, Download } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/Icons";
 import Button from "@/components/ui/Button";
+import Typewriter from "@/components/ui/Typewriter";
+import Magnetic from "@/components/ui/Magnetic";
 
 const container = {
   hidden: { opacity: 0 },
@@ -16,9 +18,9 @@ const item = {
 };
 
 const socialLinks = [
-  { href: "https://github.com/ARL150",                        label: "GitHub",             icon: <GitHubIcon size={22} /> },
-  { href: "https://linkedin.com/in/abraham-robledo-82a750271", label: "LinkedIn",           icon: <LinkedInIcon size={22} /> },
-  { href: "mailto:abrahamrobledo0402@gmail.com",              label: "Correo electrónico",  icon: <Mail size={22} /> },
+  { href: "https://github.com/ARL150",                        label: "GitHub",             icon: <GitHubIcon size={20} /> },
+  { href: "https://linkedin.com/in/abraham-robledo-82a750271", label: "LinkedIn",           icon: <LinkedInIcon size={20} /> },
+  { href: "mailto:abrahamrobledo0402@gmail.com",              label: "Correo electrónico",  icon: <Mail size={20} /> },
 ];
 
 /* Partículas con posiciones fijas (sin Math.random para evitar mismatch SSR) */
@@ -34,14 +36,29 @@ const particles = [
 ];
 
 export default function Hero() {
+  const mx = useMotionValue(-500);
+  const my = useMotionValue(-500);
+  const glow = useMotionTemplate`radial-gradient(420px circle at ${mx}px ${my}px, rgba(129,140,248,0.16), transparent 70%)`;
+
+  // Parallax: el contenido sube más lento que el scroll y se desvanece
+  const { scrollY } = useScroll();
+  const contentY = useTransform(scrollY, [0, 500], [0, 80]);
+  const contentOpacity = useTransform(scrollY, [0, 450], [1, 0.2]);
+
   return (
     <section
       id="inicio"
       aria-label="Presentación"
+      onMouseMove={(e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        mx.set(e.clientX - r.left);
+        my.set(e.clientY - r.top);
+      }}
       className="relative flex min-h-screen flex-col items-center px-4 pt-20 text-center sm:px-6"
     >
       {/* Fondo: manchas + partículas */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 overflow-hidden">
+        <motion.div className="absolute inset-0 hidden md:block" style={{ background: glow }} />
         <motion.div
           animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.65, 0.4] }}
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
@@ -66,7 +83,7 @@ export default function Hero() {
       </div>
 
       {/* Contenido */}
-      <div className="flex flex-1 items-center justify-center">
+      <motion.div className="flex flex-1 items-center justify-center pb-16" style={{ y: contentY, opacity: contentOpacity }}>
         <motion.div
           variants={container}
           initial="hidden"
@@ -108,6 +125,11 @@ export default function Hero() {
             Desarrollador de Software · Ingeniería en Sistemas Computacionales
           </motion.h2>
 
+          <motion.p variants={item} className="mb-5 min-h-8 text-lg font-semibold text-indigo-600 dark:text-indigo-400 sm:text-xl">
+            Construyo{" "}
+            <Typewriter words={["sistemas web", "automatización de procesos", "integraciones de pago", "software a medida"]} />
+          </motion.p>
+
           <motion.p
             variants={item}
             className="mb-10 text-base leading-relaxed text-gray-600 dark:text-gray-400 sm:text-lg"
@@ -121,11 +143,14 @@ export default function Hero() {
           <motion.div variants={item} className="flex flex-col items-center gap-3">
             {/* Fila principal */}
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <Button href="#proyectos" size="lg">
-                Ver proyectos
-              </Button>
+              <Magnetic>
+                <Button href="#proyectos" size="lg">
+                  Ver proyectos
+                </Button>
+              </Magnetic>
 
               {/* CV — botón outline con ícono */}
+              <Magnetic>
               <a
                 href="/cv.pdf"
                 download
@@ -135,6 +160,7 @@ export default function Hero() {
                 <Download size={15} className="transition-transform group-hover:-translate-y-0.5" aria-hidden="true" />
                 Descargar CV
               </a>
+              </Magnetic>
             </div>
 
             {/* Contacto sutil debajo */}
@@ -164,23 +190,23 @@ export default function Hero() {
                 role="listitem"
                 whileHover={{ scale: 1.25, y: -3 }}
                 whileTap={{ scale: 0.9 }}
-                className="text-gray-400 transition-colors hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded dark:hover:text-indigo-400"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-700 shadow-sm transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:border-indigo-400 dark:hover:bg-indigo-500"
               >
                 {icon}
               </motion.a>
             ))}
           </motion.div>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Flecha */}
       <motion.div
         aria-hidden="true"
-        className="pb-8 pt-4"
+        className="hidden pb-8 pt-2 [@media(min-height:800px)]:block"
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
       >
-        <ArrowDown className="text-gray-300 dark:text-gray-600" size={22} />
+        <ArrowDown className="text-indigo-500 dark:text-indigo-400" size={24} />
       </motion.div>
     </section>
   );

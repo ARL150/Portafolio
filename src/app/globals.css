@@ -71,3 +71,72 @@ html.a11y-reduce-motion *::after {
     min-height: 44px;
   }
 }
+
+/* ── Marquee de tecnologías ── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+.marquee-track {
+  animation: marquee 40s linear infinite;
+}
+
+.marquee-reverse {
+  animation-direction: reverse;
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+}
+
+.marquee-mask:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* ── Transición suave al cambiar de tema ── */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, fill 0.5s ease !important;
+}
+
+/* ── Brillo que recorre la barra del loader ── */
+@keyframes loader-shine {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+.loader-shine {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
+  animation: loader-shine 1s linear infinite;
+}
+
+/* ── Monito corredor del loader ── */
+@keyframes runner-swing {
+  from { transform: rotate(-38deg); }
+  to   { transform: rotate(38deg); }
+}
+
+@keyframes runner-hop {
+  0%, 100% { transform: translateY(0); }
+  40%      { transform: translateY(-14px); }
+}
+
+.runner-leg-a, .runner-leg-b, .runner-arm-a, .runner-arm-b {
+  transform-box: view-box;
+  animation: runner-swing 0.28s ease-in-out infinite alternate;
+}
+.runner-leg-a, .runner-leg-b { transform-origin: 16px 25px; }
+.runner-arm-a, .runner-arm-b { transform-origin: 16px 15px; }
+.runner-leg-b { animation-direction: alternate-reverse; }
+.runner-arm-a { animation-direction: alternate-reverse; }
+
+.runner-done {
+  animation: runner-hop 0.5s ease-out infinite;
+}
