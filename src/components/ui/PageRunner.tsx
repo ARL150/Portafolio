@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Runner from "@/components/ui/Runner";
 
-const phrases = ["¡Contrátame! 😄", "npm run hire-me", "Sin bugs... casi 🐛", "¡Espérame!", "Café + código ☕"];
+const phrases = ["¡Contrátame!", "npm run hire-me", "Sin bugs... casi", "¡Espérame!", "Café + código"];
 const SIZE = 30;
 
 /**

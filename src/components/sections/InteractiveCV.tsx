@@ -75,7 +75,7 @@ const commands: Record<string, () => Line[]> = {
       { text: `${e.title} — ${e.organization}`, tone: "title" as const },
       { text: `  ${e.period}`, tone: "muted" as const },
     ]),
-  certs: () => certifications.map((c) => ({ text: "✔ " + c.title, tone: "ok" as const })),
+  certs: () => certifications.map((c) => ({ text: "[OK] " + c.title, tone: "ok" as const })),
   contact: () => [
     { text: "Hablemos:", tone: "title" },
     { text: "  correo    " + email },
@@ -90,7 +90,7 @@ const welcome: Entry = {
   id: 0,
   cmd: "",
   lines: [
-    { text: "Bienvenido a mi CV interactivo 👋", tone: "title" },
+    { text: "Bienvenido a mi CV interactivo", tone: "title" },
     { text: "Escribe un comando (prueba 'help') o toca uno de los botones de abajo.", tone: "muted" },
   ],
 };
@@ -127,12 +127,12 @@ export default function InteractiveCV() {
       a.href = "/cv.pdf";
       a.download = "CV-Abraham-Robledo.pdf";
       a.click();
-      lines = [{ text: "Descargando cv.pdf ...  ✔", tone: "ok" }];
+      lines = [{ text: "Descargando cv.pdf ... [OK]", tone: "ok" }];
     } else if (cmd === "sudo hire-me" || cmd === "sudo hire me") {
       lines = [
         { text: "[sudo] verificando credenciales de reclutador...", tone: "muted" },
-        { text: "✔ Permiso concedido", tone: "ok" },
-        { text: "Abraham Robledo fue añadido a tu equipo con éxito 🚀", tone: "accent" },
+        { text: "[OK] Permiso concedido", tone: "ok" },
+        { text: "Abraham Robledo fue añadido a tu equipo con éxito", tone: "accent" },
         { text: "Siguiente paso: escribe 'contact' y hablemos." },
       ];
     } else if (cmd.startsWith("sudo")) {
@@ -140,7 +140,7 @@ export default function InteractiveCV() {
     } else if (cmd === "ls") {
       lines = [{ text: Object.keys(commands).concat("cv").join("   ") }];
     } else if (cmd === "whoami") {
-      lines = [{ text: "un futuro ingeniero que quiere trabajar contigo 😎", tone: "accent" }];
+      lines = [{ text: "un futuro ingeniero que quiere trabajar contigo", tone: "accent" }];
     } else if (commands[cmd]) {
       lines = commands[cmd]();
     } else {
