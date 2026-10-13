@@ -29,4 +29,12 @@ export const certifications: Certification[] = [
     description:
       "Participación en el programa de mentorías de Oracle con enfoque en fundamentos de Oracle Cloud Infrastructure (OCI): conceptos de nube, servicios de cómputo, almacenamiento y redes.",
   },
+  {
+    title: "Scrum Fundamentals Certified (SFC™)",
+    issuer: "SCRUMstudy",
+    date: "Octubre 2026",
+    color: "blue",
+    description:
+      "Certificación en los fundamentos de Scrum: roles, eventos y artefactos del marco ágil, aplicados a la gestión de proyectos de desarrollo de software por etapas. Certificado ID 1198597.",
+  },
 ];
