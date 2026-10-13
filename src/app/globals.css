@@ -94,6 +94,16 @@ html.a11y-reduce-motion *::after {
   animation-play-state: paused;
 }
 
+/* ── Pastilla de tecnología que se ilumina al pasar el cursor ── */
+.tech-pill:hover,
+.tech-pill:focus-visible {
+  transform: translateY(-2px) scale(1.07);
+  border-color: #818cf8;
+  background-color: #4f46e5;
+  color: #fff;
+  box-shadow: 0 0 18px rgba(129, 140, 248, 0.75);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation: none; }
 }
