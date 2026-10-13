@@ -7,31 +7,33 @@ import {
   Globe, Users, ChevronRight, ShoppingBag, Server, Megaphone,
 } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
+import SpotlightCard from "@/components/ui/SpotlightCard";
 import Badge from "@/components/ui/Badge";
 import { technicalSkills, softSkills, languages } from "@/data/skills";
 
 const categoryIcons: Record<string, React.ReactNode> = {
-  "Lenguajes":                    <Code2 size={18} />,
-  "Frontend":                     <Monitor size={18} />,
-  "Backend & Bases de datos":     <Database size={18} />,
-  "E-commerce & CRM":             <ShoppingBag size={18} />,
-  "Cloud & Infraestructura":      <Server size={18} />,
-  "Marketing Digital & SEO":      <Megaphone size={18} />,
-  "Comunicación & Clientes":      <MessageSquare size={18} />,
-  "Trabajo & Gestión":            <Brain size={18} />,
-  "Colaboración & Crecimiento":   <Users size={18} />,
+  "Lenguajes":                    <Code2 size={20} />,
+  "Frontend":                     <Monitor size={20} />,
+  "Backend & Bases de datos":     <Database size={20} />,
+  "E-commerce & CRM":             <ShoppingBag size={20} />,
+  "Cloud & Infraestructura":      <Server size={20} />,
+  "Marketing Digital & SEO":      <Megaphone size={20} />,
+  "Comunicación & Clientes":      <MessageSquare size={20} />,
+  "Trabajo & Gestión":            <Brain size={20} />,
+  "Colaboración & Crecimiento":   <Users size={20} />,
 };
 
-const categoryColors: Record<string, string> = {
-  "Lenguajes":                    "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300",
-  "Frontend":                     "bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300",
-  "Backend & Bases de datos":     "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300",
-  "E-commerce & CRM":             "bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300",
-  "Cloud & Infraestructura":      "bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300",
-  "Marketing Digital & SEO":      "bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300",
-  "Comunicación & Clientes":      "bg-pink-100 text-pink-700 dark:bg-pink-900/40 dark:text-pink-300",
-  "Trabajo & Gestión":            "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300",
-  "Colaboración & Crecimiento":   "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
+/** Degradado propio por categoría, a juego con el resto del sitio. */
+const categoryGradients: Record<string, string> = {
+  "Lenguajes":                    "from-blue-500 to-cyan-500",
+  "Frontend":                     "from-violet-500 to-purple-500",
+  "Backend & Bases de datos":     "from-emerald-500 to-teal-500",
+  "E-commerce & CRM":             "from-green-500 to-emerald-500",
+  "Cloud & Infraestructura":      "from-orange-500 to-amber-500",
+  "Marketing Digital & SEO":      "from-rose-500 to-pink-500",
+  "Comunicación & Clientes":      "from-pink-500 to-fuchsia-500",
+  "Trabajo & Gestión":            "from-indigo-500 to-blue-500",
+  "Colaboración & Crecimiento":   "from-amber-500 to-orange-500",
 };
 
 const tabs = [
@@ -51,6 +53,15 @@ const cardVariant = {
   hidden: { opacity: 0, y: 28 },
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
+
+/** Nivel aproximado para la barra de idiomas. */
+function levelPercent(level: string, native?: boolean) {
+  if (native) return 100;
+  if (/C1|C2|avanzado/i.test(level)) return 85;
+  if (/B1|B2|intermedio/i.test(level)) return 62;
+  if (/A1|A2|básico/i.test(level)) return 35;
+  return 50;
+}
 
 export default function Skills() {
   const [activeTab, setActiveTab] = useState<TabId>("tecnicas");
@@ -118,26 +129,31 @@ export default function Skills() {
                 className="grid gap-5 sm:grid-cols-2"
               >
                 {technicalSkills.map((cat) => (
-                  <motion.div
+                  <SpotlightCard
                     key={cat.category}
                     variants={cardVariant}
-                    whileHover={{ y: -4 }}
+                    whileHover={{ y: -5 }}
                     transition={{ type: "spring", stiffness: 260 }}
-                    className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800"
+                    className="group rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-shadow duration-300 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800"
                   >
-                    {/* Header con ícono */}
-                    <div className="mb-4 flex items-center gap-2.5">
-                      <span
-                        className={`inline-flex items-center justify-center rounded-lg p-2 ${
-                          categoryColors[cat.category] ?? "bg-gray-100 text-gray-600"
-                        }`}
-                        aria-hidden="true"
-                      >
-                        {categoryIcons[cat.category] ?? <ChevronRight size={18} />}
+                    {/* Header con ícono en degradado */}
+                    <div className="mb-4 flex items-center justify-between gap-2.5">
+                      <div className="flex items-center gap-2.5">
+                        <span
+                          className={`inline-flex items-center justify-center rounded-xl bg-gradient-to-br p-2.5 text-white shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6 ${
+                            categoryGradients[cat.category] ?? "from-gray-500 to-gray-600"
+                          }`}
+                          aria-hidden="true"
+                        >
+                          {categoryIcons[cat.category] ?? <ChevronRight size={18} />}
+                        </span>
+                        <h3 className="font-semibold text-gray-800 dark:text-white">
+                          {cat.category}
+                        </h3>
+                      </div>
+                      <span className="shrink-0 rounded-full bg-gray-100 px-2.5 py-0.5 text-[11px] font-medium text-gray-500 dark:bg-gray-700 dark:text-gray-400">
+                        {cat.skills.length}
                       </span>
-                      <h3 className="text-sm font-semibold text-gray-800 dark:text-white">
-                        {cat.category}
-                      </h3>
                     </div>
 
                     {/* Badges */}
@@ -147,12 +163,12 @@ export default function Skills() {
                       aria-label={`Tecnologías de ${cat.category}`}
                     >
                       {cat.skills.map((skill) => (
-                        <motion.span key={skill} whileHover={{ scale: 1.07 }} role="listitem">
+                        <motion.span key={skill} whileHover={{ scale: 1.08, y: -1 }} role="listitem">
                           <Badge>{skill}</Badge>
                         </motion.span>
                       ))}
                     </div>
-                  </motion.div>
+                  </SpotlightCard>
                 ))}
               </motion.div>
             </motion.div>
@@ -177,23 +193,23 @@ export default function Skills() {
                 className="grid gap-5 sm:grid-cols-2"
               >
                 {softSkills.map((cat) => (
-                  <motion.div
+                  <SpotlightCard
                     key={cat.category}
                     variants={cardVariant}
-                    whileHover={{ y: -4 }}
+                    whileHover={{ y: -5 }}
                     transition={{ type: "spring", stiffness: 260 }}
-                    className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800"
+                    className="group rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-shadow duration-300 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800"
                   >
                     <div className="mb-4 flex items-center gap-2.5">
                       <span
-                        className={`inline-flex items-center justify-center rounded-lg p-2 ${
-                          categoryColors[cat.category] ?? "bg-gray-100 text-gray-600"
+                        className={`inline-flex items-center justify-center rounded-xl bg-gradient-to-br p-2.5 text-white shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6 ${
+                          categoryGradients[cat.category] ?? "from-gray-500 to-gray-600"
                         }`}
                         aria-hidden="true"
                       >
-                        {categoryIcons[cat.category] ?? <Brain size={18} />}
+                        {categoryIcons[cat.category] ?? <Brain size={20} />}
                       </span>
-                      <h3 className="text-sm font-semibold text-gray-800 dark:text-white">
+                      <h3 className="font-semibold text-gray-800 dark:text-white">
                         {cat.category}
                       </h3>
                     </div>
@@ -215,7 +231,7 @@ export default function Skills() {
                         </motion.li>
                       ))}
                     </ul>
-                  </motion.div>
+                  </SpotlightCard>
                 ))}
               </motion.div>
             </motion.div>
@@ -240,34 +256,60 @@ export default function Skills() {
                 animate="show"
                 className="space-y-4"
               >
-                {languages.map((l) => (
-                  <motion.div
-                    key={l.lang}
-                    variants={cardVariant}
-                    whileHover={{ y: -3 }}
-                    transition={{ type: "spring", stiffness: 260 }}
-                    className="flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-6 py-4 shadow-sm dark:border-gray-700 dark:bg-gray-800"
-                  >
-                    <div className="flex items-center gap-3">
-                      <span
-                        className="inline-flex items-center justify-center rounded-lg bg-indigo-100 p-2 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300"
-                        aria-hidden="true"
-                      >
-                        <Globe size={18} />
-                      </span>
-                      <span className="font-semibold text-gray-800 dark:text-white">{l.lang}</span>
-                    </div>
-                    <span
-                      className={`rounded-full px-3 py-1 text-xs font-medium ${
-                        l.native
-                          ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300"
-                          : "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300"
-                      }`}
+                {languages.map((l) => {
+                  const pct = levelPercent(l.level, l.native);
+                  return (
+                    <SpotlightCard
+                      key={l.lang}
+                      variants={cardVariant}
+                      whileHover={{ y: -3 }}
+                      transition={{ type: "spring", stiffness: 260 }}
+                      className="rounded-2xl border border-gray-200 bg-white px-6 py-4 shadow-sm transition-shadow duration-300 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800"
                     >
-                      {l.level}
-                    </span>
-                  </motion.div>
-                ))}
+                      <div className="mb-3 flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <span
+                            className="inline-flex items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-blue-500 p-2 text-white shadow-md"
+                            aria-hidden="true"
+                          >
+                            <Globe size={18} />
+                          </span>
+                          <span className="font-semibold text-gray-800 dark:text-white">{l.lang}</span>
+                        </div>
+                        <span
+                          className={`rounded-full px-3 py-1 text-xs font-medium ${
+                            l.native
+                              ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300"
+                              : "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300"
+                          }`}
+                        >
+                          {l.level}
+                        </span>
+                      </div>
+
+                      {/* Barra de nivel */}
+                      <div
+                        className="h-1.5 w-full overflow-hidden rounded-full bg-gray-100 dark:bg-gray-700"
+                        role="progressbar"
+                        aria-label={`Nivel de ${l.lang}`}
+                        aria-valuenow={pct}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                      >
+                        <motion.div
+                          initial={{ scaleX: 0 }}
+                          whileInView={{ scaleX: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.9, ease: "easeOut", delay: 0.1 }}
+                          style={{ width: `${pct}%`, originX: 0 }}
+                          className={`h-full rounded-full bg-gradient-to-r ${
+                            l.native ? "from-emerald-500 to-teal-400" : "from-indigo-500 to-blue-400"
+                          }`}
+                        />
+                      </div>
+                    </SpotlightCard>
+                  );
+                })}
               </motion.div>
             </motion.div>
           )}
