@@ -9,7 +9,7 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "Softnext — Desarrollo de software a medida",
+    title: "Softnext",
     description:
       "Mi propio estudio de desarrollo: sistemas web, paneles administrativos, automatización de procesos e integraciones a la medida para negocios. Incluye el sistema de gestión documental construido para Notaría 32.",
     stack: ["React", "Next.js", "Node.js", "TypeScript", "PostgreSQL", "AWS"],
@@ -25,7 +25,7 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    title: "NovaPOS — Punto de venta distribuido",
+    title: "NovaPOS",
     description:
       "Proyecto de bases de datos distribuidas: simula una cadena de tiendas con 10 sucursales en 3 nodos primarios más un nodo de recuperación global, replicación automática y control de acceso por roles.",
     stack: ["FastAPI", "Python", "React", "TypeScript", "MongoDB", "Docker"],
