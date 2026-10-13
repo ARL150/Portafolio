@@ -44,7 +44,7 @@ export default function SectionTitle({ title, subtitle }: SectionTitleProps) {
 
       <motion.h2
         variants={{ hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease } } }}
-        className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl"
+        className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-5xl"
       >
         {title}
       </motion.h2>
