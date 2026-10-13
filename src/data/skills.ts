@@ -77,11 +77,11 @@ export const languages: { lang: string; level: string; native?: boolean; fact: s
     lang: "Español",
     level: "Nativo",
     native: true,
-    fact: "Nativo, incluyendo el dialecto de mandar audios de 5 minutos. 🎙️",
+    fact: "Nativo, incluyendo el dialecto de mandar audios de 5 minutos.",
   },
   {
     lang: "Inglés",
     level: "Intermedio (B1 / B2)",
-    fact: "Fluent in reading error messages and panicking in English. 😅",
+    fact: "Fluent in reading error messages and panicking in English.",
   },
 ];
