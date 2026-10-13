@@ -307,6 +307,8 @@ export default function Skills() {
                           }`}
                         />
                       </div>
+
+                      <p className="mt-3 text-xs italic text-gray-400 dark:text-gray-500">{l.fact}</p>
                     </SpotlightCard>
                   );
                 })}

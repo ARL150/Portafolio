@@ -72,7 +72,16 @@ export const softSkills: SkillCategory[] = [
   },
 ];
 
-export const languages: { lang: string; level: string; native?: boolean }[] = [
-  { lang: "Español", level: "Nativo", native: true },
-  { lang: "Inglés",  level: "Intermedio (B1 / B2)" },
+export const languages: { lang: string; level: string; native?: boolean; fact: string }[] = [
+  {
+    lang: "Español",
+    level: "Nativo",
+    native: true,
+    fact: "Nativo, incluyendo el dialecto de mandar audios de 5 minutos. 🎙️",
+  },
+  {
+    lang: "Inglés",
+    level: "Intermedio (B1 / B2)",
+    fact: "Fluent in reading error messages and panicking in English. 😅",
+  },
 ];
