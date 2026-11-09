@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GraduationCap, MapPin, ChevronRight, Star, ExternalLink } from "lucide-react";
+import { GraduationCap, MapPin, ChevronRight, Star, ExternalLink, Trophy } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { education } from "@/data/experience";
 
@@ -10,10 +10,14 @@ const itemVariant = {
   show: { opacity: 1, x: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
 };
 
-const institutionMeta: Record<string, { url?: string; badge?: string; badgeColor?: string }> = {
+const institutionMeta: Record<
+  string,
+  { url?: string; badge?: string; badgeColor?: string; extraBadge?: string }
+> = {
   "Universidad Autónoma de Aguascalientes": {
     url: "https://www.uaa.mx/portal/",
     badge: "Promedio: 9.65 / 10",
+    extraBadge: "EGEL-CENEVAL: Desempeño Sobresaliente",
   },
   "Universidad de Granada — E.T.S. de Ingenierías Informática y de Telecomunicación": {
     url: "https://etsiit.ugr.es/",
@@ -120,16 +124,26 @@ export default function Education() {
                     </div>
 
                     {/* Badge especial por institución */}
-                    {meta?.badge && (
-                      <div
-                        className={`mt-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
-                          isEmerald
-                            ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300"
-                            : "bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300"
-                        }`}
-                      >
-                        <Star size={12} aria-hidden="true" />
-                        {meta.badge}
+                    {(meta?.badge || meta?.extraBadge) && (
+                      <div className="mt-3 flex flex-wrap gap-2">
+                      {meta?.badge && (
+                        <div
+                          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
+                            isEmerald
+                              ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300"
+                              : "bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300"
+                          }`}
+                        >
+                          <Star size={12} aria-hidden="true" />
+                          {meta.badge}
+                        </div>
+                      )}
+                      {meta?.extraBadge && (
+                        <div className="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300">
+                          <Trophy size={12} aria-hidden="true" />
+                          {meta.extraBadge}
+                        </div>
+                      )}
                       </div>
                     )}
 

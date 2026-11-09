@@ -60,6 +60,7 @@ export const education: ExperienceItem[] = [
     description: "9.º semestre en curso. Promedio general: 9.65 / 10.",
     bullets: [
       "Promedio general: 9.65 / 10.",
+      "Testimonio de Desempeño Sobresaliente en el EGEL-CENEVAL de Ingeniería Computacional (2026), el nivel más alto del examen nacional de egreso.",
       "Enfoque en desarrollo de software, bases de datos y redes.",
     ],
   },

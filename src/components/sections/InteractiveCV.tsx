@@ -44,6 +44,7 @@ const commands: Record<string, () => Line[]> = {
     { text: "Dos años desarrollando software a medida para clientes en México:" },
     { text: "sistemas web, automatización de procesos e integración de pagos." },
     { text: "Promedio: 9.65", tone: "ok" },
+    { text: "EGEL-CENEVAL: Testimonio de Desempeño Sobresaliente", tone: "ok" },
   ],
   skills: () =>
     technicalSkills.flatMap((c) => [
