@@ -22,7 +22,7 @@ export const technicalSkills: SkillCategory[] = [
   },
   {
     category: "Cloud & Infraestructura",
-    skills: ["AWS (Cloud Foundations)", "Oracle Cloud Infrastructure", "Vercel", "Servidores VPS", "cPanel", "Dominios y hosting", "Linux", "Git", "GitHub"],
+    skills: ["AWS (Cloud Foundations, Operations y Security)", "Oracle Cloud Infrastructure", "Vercel", "Servidores VPS", "cPanel", "Dominios y hosting", "Linux", "Git", "GitHub"],
   },
   {
     category: "Marketing Digital & SEO",

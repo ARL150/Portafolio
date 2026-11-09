@@ -21,6 +21,26 @@ export const certifications: Certification[] = [
       "Formación oficial de AWS en fundamentos de cómputo en la nube: infraestructura global, servicios core (EC2, S3, RDS, IAM), arquitectura, seguridad y modelos de precios.",
   },
   {
+    title: "AWS Academy Graduate — Cloud Operations",
+    issuer: "Amazon Web Services (AWS Academy)",
+    date: "Noviembre 2026",
+    hours: 40,
+    credentialUrl: "https://www.credly.com/go/sS10KkTq",
+    color: "orange",
+    description:
+      "Operación de cargas de trabajo en AWS: automatización e infraestructura como código, monitoreo con CloudWatch, gestión de recursos, alta disponibilidad, escalado y administración de costos.",
+  },
+  {
+    title: "AWS Academy Graduate — Cloud Security Foundations",
+    issuer: "Amazon Web Services (AWS Academy)",
+    date: "Noviembre 2026",
+    hours: 20,
+    credentialUrl: "https://www.credly.com/go/qt5OgbkG",
+    color: "green",
+    description:
+      "Fundamentos de seguridad en la nube de AWS: modelo de responsabilidad compartida, IAM, protección de datos y cifrado, seguridad de redes, monitoreo, detección de incidentes y cumplimiento.",
+  },
+  {
     title: "Oracle Cloud Foundations",
     issuer: "Oracle",
     program: "Programa de Mentorías Oracle",
@@ -33,6 +53,7 @@ export const certifications: Certification[] = [
     title: "Scrum Fundamentals Certified (SFC™)",
     issuer: "SCRUMstudy",
     date: "Octubre 2026",
+    credentialUrl: "/certificados/scrum-fundamentals-certified.pdf",
     color: "blue",
     description:
       "Certificación en los fundamentos de Scrum: roles, eventos y artefactos del marco ágil, aplicados a la gestión de proyectos de desarrollo de software por etapas. Certificado ID 1198597.",
