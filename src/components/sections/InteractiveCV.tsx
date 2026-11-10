@@ -61,8 +61,9 @@ const commands: Record<string, () => Line[]> = {
   ],
   projects: () =>
     projects.flatMap((p) => [
-      { text: p.title, tone: "title" as const },
+      { text: p.title + (p.client ? " — " + p.client : ""), tone: "title" as const },
       { text: "  " + p.description },
+      ...(p.demo ? [{ text: "  url: " + p.demo, tone: "muted" as const }] : []),
       { text: "  stack: " + p.stack.join(", "), tone: "accent" as const },
     ]),
   experience: () =>
