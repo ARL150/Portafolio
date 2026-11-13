@@ -52,11 +52,11 @@ export const projects: Project[] = [
     title: "Valenne Jewelry",
     client: "Joyería · Xalapa, Veracruz",
     description:
-      "Tienda en línea de joyería femenina con envíos a todo México. Identidad visual elegante en tonos dorados y página de pre-lanzamiento con registro de correos e integración con Instagram, lista para abrir su catálogo de anillos, collares, aretes y pulseras.",
+      "Tienda en línea de joyería femenina con envíos a todo México. Identidad visual elegante en tonos dorados, catálogo por categorías (anillos, collares, aretes y pulseras), pago seguro y atención directa por WhatsApp.",
     stack: ["Shopify", "Liquid", "JavaScript", "CSS"],
     demo: "https://valenne.com.mx/",
     image: "/images/projects/valenne.webp",
-    status: "soon",
+    status: "live",
     featured: true,
   },
   {
