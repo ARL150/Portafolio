@@ -64,7 +64,10 @@ export const projects: Project[] = [
     description:
       "Mi propio estudio de desarrollo: sistemas web, paneles administrativos, automatización de procesos e integraciones a la medida para negocios. Desde aquí desarrollé los proyectos para Notaría 32, New Project Store y Valenne.",
     stack: ["React", "Next.js", "Node.js", "TypeScript", "PostgreSQL", "AWS"],
+    client: "Mi estudio de desarrollo · Fundador",
     demo: "https://www.softnext.tech/",
+    image: "/images/projects/softnext.webp",
+    status: "live",
     featured: true,
   },
   {
